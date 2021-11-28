@@ -1,7 +1,10 @@
 const Department = require('../lib/Department');
 
-const obj = {
-    id = 1,
-    name = 'Engineering'
-}
+test('should create department object', () => {
+    const inputs = {
+        name: 'Engineering'
+    }
+    const department = new Department(inputs);
 
+    expect(department.name).toBe('Engineering')
+});
