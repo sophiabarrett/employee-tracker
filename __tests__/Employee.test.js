@@ -24,5 +24,6 @@ test('should update employee role', () => {
     }
     const employee = new Employee(inputs);
 
-    expect(employee.updateRole(5)).stringContaining(`UPDATE employees SET role = 5 WHERE id = `);
+    expect(employee.updateRole(5).sql).toMatch(`UPDATE employees SET role_id = ? WHERE id = ?`);
+    expect(employee.updateRole(5).params).toContain(5);
 });
