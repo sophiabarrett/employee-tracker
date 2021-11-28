@@ -1,7 +1,4 @@
 USE employee_tracker;
-DELETE FROM employees;
-DELETE FROM roles;
-DELETE FROM departments;
 
 INSERT INTO departments (name)
 VALUES
@@ -39,13 +36,13 @@ VALUES
     ('Sandy', 'Powell', 4, 6),
     ('Emil', 'Zola', 4, 6),
     ('Sissy', 'Coalpits', 5, NULL),
-    ('Antoinette', 'Capet', 6, 9),
-    ('Samuel', 'Delany', 6, 9),
-    ('Tony', 'Duvert', 6, 9),
-    ('Dennis', 'Cooper', 6, 9),
+    ('Antoinette', 'Capet', 6, 10),
+    ('Samuel', 'Delany', 6, 10),
+    ('Tony', 'Duvert', 6, 10),
+    ('Dennis', 'Cooper', 6, 10),
     ('Monica', 'Bellucci', 7, NULL),
-    ('Samuel', 'Johnson', 8, 16),
-    ('John', 'Dryden', 8, 16),
+    ('Samuel', 'Johnson', 8, 15),
+    ('John', 'Dryden', 8, 15),
     ('Alexander', 'Pope', 9, NULL),
-    ('Lionel', 'Johnson', 10, 19),
-    ('Aubrey', 'Beardsley', 10, 19);
+    ('Lionel', 'Johnson', 10, 18),
+    ('Aubrey', 'Beardsley', 10, 18);

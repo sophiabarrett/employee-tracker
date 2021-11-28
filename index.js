@@ -1,3 +1,3 @@
-const promptUser = require('./utils/prompts');
+const Session = require('./lib/Session');
 
-promptUser();
+new Session().initializeApp();

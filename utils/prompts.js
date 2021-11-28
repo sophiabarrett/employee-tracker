@@ -1,6 +1,3 @@
-const inquirer = require('inquirer');
-const Query = require('../lib/Queries');
-
 const actions = {
     type: 'list',
     name: 'action',
@@ -16,33 +13,17 @@ const actions = {
     ]
 }
 
-
-function promptUser() {
-    return inquirer
-        .prompt(actions)
-        .then(({ action }) => {
-            if (action === 'View all departments') {
-                new Query().viewDepartments();
-            }
-            if (action === 'View all roles') {
-
-            }
-            if (action === 'View all employees') {
-
-            }
-            if (action === 'Add a department') {
-
-            }
-            if (action === 'Add a role') {
-
-            }
-            if (action === 'Add an employee') {
-
-            }
-            if (action === 'Update an employee role') {
-
-            }
-        });
+const exit = {
+    type: 'list',
+    name: 'exit',
+    message: 'Would you like to continue?',
+    choices: [
+        'Continue',
+        'EXIT'
+    ]
 }
 
-module.exports = promptUser;
+module.exports = {
+    actions,
+    exit
+};
