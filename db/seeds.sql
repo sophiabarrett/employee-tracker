@@ -1,3 +1,5 @@
+USE employee_tracker;
+DELETE FROM employees;
 DELETE FROM roles;
 DELETE FROM departments;
 
