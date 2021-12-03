@@ -25,5 +25,12 @@ module.exports = {
                 'EXIT'
             ]
         }
+    ],
+    newDepartment: [
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter a name for your new department:'
+        }
     ]
 }

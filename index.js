@@ -22,9 +22,11 @@ function promptUserForAction() {
             return new Query().viewEmployees();
         }
         if (action === 'Add a department') {
-            // return inquirer
-            // .prompt(prompts.newDepartment)
-            // .then();
+            return inquirer
+            .prompt(prompts.newDepartment)
+            .then(({ name }) => {
+                return new Query().addDepartment(name);
+            });
         }
         if (action === 'Add a role') {
 
@@ -37,7 +39,18 @@ function promptUserForAction() {
         } 
     }).then(query => {
         if (!query.params) {
-            viewData(query);
+            db.promise()
+            .query(query.sql)
+            .then(response => {
+                console.log(``);
+                console.table(response[0]);
+            })
+            .then(() => promptUserToContinue());
+        } else {
+            db.promise()
+            .query(query.sql, query.params)
+            .then(() => console.log('Success!'))
+            .then(() => promptUserToContinue());
         }
     });
 }
@@ -53,16 +66,6 @@ function promptUserToContinue() {
             promptUserForAction();
         }
     });
-}
-
-function viewData(query) {
-    db.promise()
-    .query(query.sql)
-    .then(response => {
-        console.log(``)
-        console.table(response[0]);
-    })
-    .then(() => promptUserToContinue());
 }
 
 initializeApp();
