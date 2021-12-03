@@ -22,9 +22,9 @@ function promptUserForAction() {
             return new Query().viewEmployees();
         }
         if (action === 'Add a department') {
-            return inquirer
-            // sql = insertDepartment;
-            // params.push()
+            // return inquirer
+            // .prompt(prompts.newDepartment)
+            // .then();
         }
         if (action === 'Add a role') {
 
@@ -36,7 +36,7 @@ function promptUserForAction() {
 
         } 
     }).then(query => {
-        if (query.type === 'view') {
+        if (!query.params) {
             viewData(query);
         }
     });
