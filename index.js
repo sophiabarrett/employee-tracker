@@ -64,7 +64,14 @@ async function addDepartment() {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter a name for the new department:'
+            message: 'Enter a name for the new department:',
+            validate: input => {
+                if (input.length > 80) { 
+                    console.log('\nDepartment names should be less than 80 characters')
+                    return false;
+                }
+                return true;
+            }
         }
     ]));
     const query = new Query().addDepartment(department);
