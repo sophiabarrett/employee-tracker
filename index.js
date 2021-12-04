@@ -66,8 +66,8 @@ async function addDepartment() {
             name: 'name',
             message: 'Enter a name for the new department:',
             validate: input => {
-                if (input.length > 80) { 
-                    console.log('\nDepartment names should be less than 80 characters')
+                if (input.length > 80 || !input) { 
+                    console.log('\nDepartment names should be between 1 and 80 characters.')
                     return false;
                 }
                 return true;
@@ -84,12 +84,26 @@ async function addRole() {
         {
             type: 'input',
             name: 'title',
-            message: 'Enter a title for the new role:'
+            message: 'Enter a title for the new role:',
+            validate: input => {
+                if (input.length > 80 || !input) { 
+                    console.log('\nRole titles should be between 1 and 80 characters.')
+                    return false;
+                }
+                return true;
+            }
         },
         {
             type: 'input',
             name: 'salary',
-            message: 'Enter a salary for the new role:'
+            message: 'Enter a salary for the new role:',
+            validate: input => {
+                if (isNaN(input) || !input) { 
+                    console.log('\nSalaries should be entered as integers. Please do not include characters such as commas or dollar signs.')
+                    return false;
+                }
+                return true;
+            }
         },
         {
             type: 'list',
@@ -111,12 +125,26 @@ async function addEmployee() {
         {
             type: 'input',
             name: 'firstName',
-            message: 'What is the new employee\'s first name?'
+            message: 'What is the new employee\'s first name?',
+            validate: input => {
+                if (input.length > 30 || !input) { 
+                    console.log('\nFirst name should be between 1 and 30 characters.')
+                    return false;
+                }
+                return true;
+            }
         },
         {
             type: 'input',
             name: 'lastName',
-            message: 'What is the new employee\'s last name?'
+            message: 'What is the new employee\'s last name?',
+            validate: input => {
+                if (input.length > 30 || !input) { 
+                    console.log('\nFirst name should be between 1 and 30 characters.')
+                    return false;
+                }
+                return true;
+            }
         },
         {
             type: 'list',
