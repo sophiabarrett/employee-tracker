@@ -126,7 +126,8 @@ async function addEmployee() {
     ]));
     employee.role = await new Query().getRoleId(employee.role);
     employee.manager = await new Query().getEmployeeId(employee.manager);
-    const query = new Query().addEmployee();
+    const query = new Query().addEmployee( employee.firstName, employee.lastName, employee.role, employee.manager);
+    updateData(query);
 }
 
 async function promptUserForAction() {
