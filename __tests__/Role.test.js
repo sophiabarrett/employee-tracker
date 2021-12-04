@@ -2,13 +2,13 @@ const Role = require('../lib/Role');
 
 test('should create role object', () => {
     const inputs = {
-        name: 'Software Engineer',
+        title: 'Software Engineer',
         salary: 120000,
-        departmentId: 1
+        department: 1
     }
     const role = new Role(inputs);
 
-    expect(role.name).toBe('Software Engineer');
+    expect(role.title).toBe('Software Engineer');
     expect(role.salary).toBe(120000);
-    expect(role.departmentId).toBe(1);
+    expect(role.department).toBe(1);
 });
