@@ -40,7 +40,7 @@ function viewData(query) {
 function updateData(query) {
     db.promise()
     .query(query.sql, query.params)
-    .then(() => console.log('Success!'))
+    .then(() => console.log(query.successMessage))
     .then(() => promptUserToContinue());
 }
 
