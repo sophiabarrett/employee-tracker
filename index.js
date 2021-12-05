@@ -31,6 +31,10 @@ function viewData(query) {
     db.promise()
     .query(query.sql, query.params)
     .then(response => {
+        if (!response[0].length) {
+            console.log('\nNothing found.\n');
+            return;
+        }
         console.log(``);
         console.table(response[0]);
     })
@@ -65,12 +69,27 @@ async function viewEmployeesByManager() {
         {
             type: 'list',
             name: 'fullName',
-            message: 'Which manager would you like to view employees of?',
+            message: 'Which manager\'s employees would you like to view?',
             choices: employeesArr
         }
     ]);
-    managerId = await new Query().getEmployeeId(manager.fullName);
-    const query = new Query().viewEmployeesByManager(managerId);
+    manager.id = await new Query().getEmployeeId(manager.fullName);
+    const query = new Query().viewEmployeesByManager(manager.id);
+    viewData(query);
+}
+
+async function viewEmployeesByDepartment() {
+    const departmentsArr = await new Query().getDepartmentNamesAsArray();
+    const department = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'name',
+            message: 'Which department\'s employees would you like to view?',
+            choices: departmentsArr
+        }
+    ]);
+    department.id = await new Query().getDepartmentId(department.name);
+    const query = new Query().viewEmployeesByDepartment(department.id);
     viewData(query);
 }
 
@@ -235,6 +254,7 @@ async function promptUserForAction() {
             'View all roles',
             'View all employees',
             'View employees by manager',
+            'View employees by department',
             'Add a department',
             'Add a role',
             'Add an employee',
@@ -246,6 +266,7 @@ async function promptUserForAction() {
     if (action === 'View all roles') { viewRoles() }
     if (action === 'View all employees') { viewAllEmployees() }
     if (action === 'View employees by manager') { viewEmployeesByManager() }
+    if (action === 'View employees by department') { viewEmployeesByDepartment() }
     if (action === 'Add a department') { addDepartment() }
     if (action === 'Add a role') { addRole() }
     if (action === 'Add an employee') { addEmployee() }
