@@ -165,14 +165,14 @@ async function addEmployee() {
     updateData(query);
 }
 
-async function updateEmployee() {
+async function updateEmployeeRole() {
     const rolesArr = await new Query().getRoleTitlesAsArray();
     const employeesArr = await new Query().getEmployeeNamesAsArray();
     const employee = await inquirer.prompt([
         {
             type: 'list',
             name: 'fullName',
-            message: 'Which employee would you like to update?',
+            message: 'Which employee\'s role would you like to update?',
             choices: employeesArr
         },
         {
@@ -184,7 +184,29 @@ async function updateEmployee() {
     ]);
     employee.id = await new Query().getEmployeeId(employee.fullName);
     employee.role = await new Query().getRoleId(employee.role);
-    const query = new Query().updateEmployee(employee);
+    const query = new Query().updateEmployeeRole(employee);
+    updateData(query);
+}
+
+async function updateEmployeeManager() {
+    const employeesArr = await new Query().getEmployeeNamesAsArray();
+    const employee = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'fullName',
+            message: 'Which employee\'s manager would you like to update?',
+            choices: employeesArr
+        },
+        {
+            type: 'list',
+            name: 'manager',
+            message: 'Who is the employee\'s new manager?',
+            choices: employeesArr
+        }
+    ]);
+    employee.id = await new Query().getEmployeeId(employee.fullName);
+    employee.manager = await new Query().getEmployeeId(employee.manager);
+    const query = new Query().updateEmployeeManager(employee);
     updateData(query);
 }
 
@@ -200,7 +222,8 @@ async function promptUserForAction() {
             'Add a department',
             'Add a role',
             'Add an employee',
-            'Update an employee role'
+            'Update an employee\'s role',
+            'Update an employee\'s manager'
         ]
     });
     if (action === 'View all departments') { viewDepartments() }
@@ -209,7 +232,8 @@ async function promptUserForAction() {
     if (action === 'Add a department') { addDepartment() }
     if (action === 'Add a role') { addRole() }
     if (action === 'Add an employee') { addEmployee() }
-    if (action === 'Update an employee role') { updateEmployee() }
+    if (action === 'Update an employee\'s role') { updateEmployeeRole() }
+    if (action === 'Update an employee\'s manager') { updateEmployeeManager() }
 };
 
 function initializeApp() {
