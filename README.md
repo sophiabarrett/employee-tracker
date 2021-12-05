@@ -12,7 +12,7 @@ Command line CMS application for managing a company's employee database.
 6. To run application, start server by running "npm start"
 
 ## Video Walkthrough
-[Click here to watch the video walkthrough!](#)
+[Click here to watch the video walkthrough!](https://watch.screencastify.com/v/a7rdspK2cCNJyPYwdyi3)
 
 # Questions
 For questions contact Sophia Barrett at [sophia@yoursummit.media](mailto:sophia@yoursummit.media) or visit [github.com/sophiabarrett](https://github.com/sophiabarrett).
