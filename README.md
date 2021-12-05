@@ -11,6 +11,9 @@ Command line CMS application for managing a company's employee database.
 5. Seed database by running "source db/seeds.sql" in MySQL shell
 6. To run application, start server by running "npm start"
 
+## Screenshot
+![screenshot of app](./screenshot.png)
+
 ## Video Walkthrough
 [Click here to watch the video walkthrough!](https://watch.screencastify.com/v/a7rdspK2cCNJyPYwdyi3)
 
