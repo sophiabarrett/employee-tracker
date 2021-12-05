@@ -29,7 +29,7 @@ function promptUserToContinue() {
 
 function viewData(query) {
     db.promise()
-    .query(query.sql)
+    .query(query.sql, query.params)
     .then(response => {
         console.log(``);
         console.table(response[0]);
@@ -54,8 +54,23 @@ function viewRoles() {
     viewData(query);
 }
 
-function viewEmployees() {
-    const query = new Query().viewEmployees();
+function viewAllEmployees() {
+    const query = new Query().viewAllEmployees();
+    viewData(query);
+}
+
+async function viewEmployeesByManager() {
+    const employeesArr = await new Query().getEmployeeNamesAsArray();
+    const manager = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'fullName',
+            message: 'Which manager would you like to view employees of?',
+            choices: employeesArr
+        }
+    ]);
+    managerId = await new Query().getEmployeeId(manager.fullName);
+    const query = new Query().viewEmployeesByManager(managerId);
     viewData(query);
 }
 
@@ -219,6 +234,7 @@ async function promptUserForAction() {
             'View all departments',
             'View all roles',
             'View all employees',
+            'View employees by manager',
             'Add a department',
             'Add a role',
             'Add an employee',
@@ -228,7 +244,8 @@ async function promptUserForAction() {
     });
     if (action === 'View all departments') { viewDepartments() }
     if (action === 'View all roles') { viewRoles() }
-    if (action === 'View all employees') { viewEmployees() }
+    if (action === 'View all employees') { viewAllEmployees() }
+    if (action === 'View employees by manager') { viewEmployeesByManager() }
     if (action === 'Add a department') { addDepartment() }
     if (action === 'Add a role') { addRole() }
     if (action === 'Add an employee') { addEmployee() }
