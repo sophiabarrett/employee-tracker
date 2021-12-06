@@ -6,6 +6,7 @@ const Department = require('./lib/Department');
 const Role = require('./lib/Role');
 const Employee = require('./lib/Employee');
 
+// prompt user for next step after completing a query
 function promptUserToContinue() {
     return inquirer
     .prompt({
@@ -27,6 +28,7 @@ function promptUserToContinue() {
     });
 }
 
+// run user selected query, then display data to user
 function viewData(query) {
     db.promise()
     .query(query.sql, query.params)
@@ -41,6 +43,7 @@ function viewData(query) {
     .then(() => promptUserToContinue());
 }
 
+// run user selected query, then update database
 function updateData(query) {
     db.promise()
     .query(query.sql, query.params)
@@ -48,6 +51,7 @@ function updateData(query) {
     .then(() => promptUserToContinue());
 }
 
+// DEFINE QUERIES AVAILABLE TO USER //
 function viewDepartments() {
     const query = new Query().viewDepartments();
     viewData(query);
@@ -243,7 +247,9 @@ async function updateEmployeeManager() {
     const query = new Query().updateEmployeeManager(employee);
     updateData(query);
 }
+// END DEFINE QUERIES AVAILABLE TO USER //
 
+// prompt user to select a query
 async function promptUserForAction() {
     const { action } = await inquirer.prompt({
         type: 'list',
@@ -274,6 +280,7 @@ async function promptUserForAction() {
     if (action === 'Update an employee\'s manager') { updateEmployeeManager() }
 };
 
+// prompt user to select a query on startup
 function initializeApp() {
     promptUserForAction();
 };
